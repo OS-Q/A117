@@ -1,3 +1,7 @@
 *.pyc
+*.lst
+*.txt
+*desktop*
+*.o
 .pio/
 .vscode/
