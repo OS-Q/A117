@@ -22,9 +22,14 @@ jobs:
         tests:
           - "tests/external-libs"
           - "tests/internal-libs"
-          - "libraries/VUsbDevice/examples"
+          - "libraries/E2PROM/examples"
           - "libraries/PMU/examples"
           - "libraries/WDT/examples"
+          - "libraries/Wire/examples"
+          - "libraries/LarduinoISP/examples"
+          - "libraries/lgt328p/examples"
+          - "libraries/Rtc_Pcf8563/examples"
+          - "libraries/VUsbMouse/examples"
           - "libraries/differential_amplifier/examples"
 
     steps:
