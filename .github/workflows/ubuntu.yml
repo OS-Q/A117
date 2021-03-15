@@ -23,9 +23,9 @@ jobs:
           - "tests/external-libs"
           - "tests/internal-libs"
           - "libraries/VUsbDevice/examples"
-          - "examples/PMU/examples"
-          - "examples/WDT/examples"
-          - "examples/differential_amplifier/examples"
+          - "libraries/PMU/examples"
+          - "libraries/WDT/examples"
+          - "libraries/differential_amplifier/examples"
 
     steps:
       - uses: actions/checkout@v2
