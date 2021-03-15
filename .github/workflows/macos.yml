@@ -22,6 +22,7 @@ jobs:
         tests:
           - "tests/external-libs"
           - "tests/internal-libs"
+          - "tests/PMU"
 
     steps:
       - uses: actions/checkout@v2
