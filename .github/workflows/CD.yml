@@ -112,7 +112,13 @@ jobs:
       - name: Upload To OSS
         id: OSS
         run: |
-          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_A_BUCKET }} -rf
+          rm A12.zip
+          mdkir A12
+          cp -r bootloaders cores libraries variants boards.txt platform.txt programmers.txt A12/
+          zip -r A12.zip A12
+          ls -l  ${{ env.FIRMWARE }}/A12.zip
+          sha256sum  ${{ env.FIRMWARE }}/A12.zip
+          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ env.FIRMWARE }}/a12_index.json ${{ secrets.OSS_A_BUCKET }} -rf
           echo "::set-output name=status::success"
 
       - name: Send Mail
