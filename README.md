@@ -10,4 +10,4 @@
 
 [A12](https://github.com/OS-Q/A12) 适用于 [LGT8F](http://www.lgtic.com/lgt8fx8p/)芯片
 
-### [Q = (OpenSource & OperatingSystem) ](http://www.OS-Q.com)
+### [源圈 OS-Q (Open Source & QA) ](http://www.OS-Q.com)
