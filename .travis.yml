@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.7"
+
+env:
+  - PLATFORMIO_PROJECT_DIR=tests/external-libs
+  - PLATFORMIO_PROJECT_DIR=tests/internal-libs
+
+install:
+  - pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
+  - platformio platform install https://github.com/OS-Q/P12/releases/latest/download/P12.zip
+
+script:
+  - platformio run -d $PLATFORMIO_PROJECT_DIR
+
+notifications:
+  email: false

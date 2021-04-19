@@ -12,8 +12,8 @@ env:
   UPLOAD_BUILD: true
 
 jobs:
-  check_latest:
-    name: latest
+  check:
+    name: check
     strategy:
       fail-fast: false
       matrix:
@@ -48,7 +48,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
-          qio platform install file://.
+          qio platform install https://github.com/OS-Q/P12/releases/latest/download/P12.zip
 
       - name: Build
         id: build
@@ -59,46 +59,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: failure() &&  env.UPLOAD_BUILD
         with:
-          name: latest_${{ matrix.examples }}_${{ matrix.os }}
-          path: ${{ matrix.examples }}
-
-  check_release:
-    name: release
-    strategy:
-      fail-fast: false
-      matrix:
-        examples:
-          - "arduino-blink"
-          - "arduino-own-src_dir"
-          - "MPU_Speed_Setting"
-
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: "recursive"
-          fetch-depth: 1
-
-      - name: Set up Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9
-
-      - name: Install release
-        run: |
-          python -m pip install --upgrade pip
-          pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
-          pio platform install https://github.com/OS-Q/P12/releases/latest/download/P12.zip
-
-      - name: Build
-        id: build
-        if: success() && github.repository == 'OS-Q/A12'
-        run: |
-          pio run -d ${{ matrix.examples }} > ${{ matrix.examples }}/log.txt
-
-      - uses: actions/upload-artifact@v2
-        if: failure() &&  env.UPLOAD_BUILD
-        with:
-          name: release_${{ matrix.examples }}_${{ matrix.os }}
+          name: ${{ matrix.examples }}_${{ matrix.os }}
           path: ${{ matrix.examples }}

@@ -9,7 +9,6 @@ steps:
   - apt install -y git
   - git submodule update --init --recursive
   - pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
-  - qio platform install file://.
-  - qio run -d examples/arduino-blink
-  - qio run -d examples/arduino-own-src_dir
-  - qio run -d examples/MPU_Speed_Setting
+  - qio platform install https://github.com/OS-Q/P12/releases/latest/download/P12.zip
+  - qio run -d tests/external-libs
+  - qio run -d tests/internal-libs
