@@ -11,7 +11,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: true
       matrix:
@@ -24,16 +23,15 @@ jobs:
       with:
         submodules: "recursive"
         fetch-depth: 1
-
     - name: Python
       uses: actions/setup-python@v1
       with:
         python-version: 3.9
-
     - name: Install
       run: |
         python -m pip install --upgrade pip
         pip install -U https://github.com/OS-Q/S03/releases/latest/download/S03.zip
+        qio update
         qio platform install https://github.com/OS-Q/P12/releases/latest/download/P12.zip
 
     - name: Build
@@ -165,7 +163,7 @@ jobs:
           git tag -d ${GITHUB_REF/refs\/tags\//}
           git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
 
-  failure:
+  build_fail:
     needs:
       - build
     if: failure() && startsWith(github.ref, 'refs/tags/')
@@ -183,7 +181,7 @@ jobs:
           git tag -d ${GITHUB_REF/refs\/tags\//}
           git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
 
-  failure:
+  release_fail:
     needs:
       - release
     if: failure() && startsWith(github.ref, 'refs/tags/')
