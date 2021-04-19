@@ -105,7 +105,7 @@ jobs:
       - name: Setup OSS
         uses: stopstopstop/ossutil-action@master
         with:
-          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          endpoint: ${{ secrets.OSS_A_ENDPOINT }}
           access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
           access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
 
