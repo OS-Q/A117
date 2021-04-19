@@ -15,8 +15,8 @@
           "category": "arduino",
           "url": "https://platformio.oss-accelerate.aliyuncs.com/package/arduino/A12.zip",
           "archiveFileName": "A12.zip",
-          "checksum": "SHA-256:309e0d208780cabbfbd4a0b2d5425b349048c0dc83d453f69cb7613e0a284650",
-          "size": "382871",
+          "checksum": "SHA-256:800bb286776d6d3c2c6c71f4d691dfb4f974e1f0792b38f97315e12859e2ec18",
+          "size": "385087",
           "help": {
             "online": "https://github.com/OS-Q/A12/issues"
           },

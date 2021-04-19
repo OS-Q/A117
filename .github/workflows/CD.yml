@@ -41,24 +41,6 @@ jobs:
       run: |
         qio run -d ${{ matrix.examples }}
 
-  delet:
-    needs:
-      - build
-    if: failure() && startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: "recursive"
-
-      - name: Delet tag
-        id: delet
-        run: |
-          git fetch
-          git tag -d ${GITHUB_REF/refs\/tags\//}
-          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
-
   release:
     needs:
       - build
@@ -145,7 +127,8 @@ jobs:
           zip -r A12.zip A12
           ls -l  ${{ env.FIRMWARE }}/A12.zip
           sha256sum  ${{ env.FIRMWARE }}/A12.zip
-          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ env.FIRMWARE }}/a12_index.json ${{ secrets.OSS_A_BUCKET }} -rf
+          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_A_BUCKET }} -rf
+          ossutil cp ${{ env.FIRMWARE }}/a12_index.json ${{ secrets.OSS_A_BUCKET }} -f
           echo "::set-output name=status::success"
 
       - name: Send Mail
@@ -177,6 +160,25 @@ jobs:
           message: ${{steps.rebuild.outputs.status}}
 
       - name: Delet mark tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
+  failure:
+    needs:
+      - build
+      - release
+    if: failure() && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - name: Delet tag
+        id: delet
         run: |
           git fetch
           git tag -d ${GITHUB_REF/refs\/tags\//}
