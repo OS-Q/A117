@@ -56,8 +56,8 @@ jobs:
         id: delet
         run: |
           git fetch
-          git tag -d ${{ steps.tag.outputs.release_tag }}
-          git push origin :refs/tags/${{ steps.tag.outputs.release_tag }}
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
 
   release:
     needs:
@@ -100,9 +100,6 @@ jobs:
       - name: SHA-256
         id: SHA
         run: |
-          ls -l  ${{ env.FIRMWARE }}/A12.zip
-          sha256sum  ${{ env.FIRMWARE }}/A12.zip
-          # sha256sum  ${{ env.FIRMWARE }}/A12.zip > SHA.txt
           ls -l ${{ env.FIRMWARE }}/A12.zip >> README.txt
           sha256sum  ${{ env.FIRMWARE }}/A12.zip >> README.txt
           # python -c "import json; import os; fp=open(os.path.expanduser('./a12_index.json'), 'r+'); data=json.load(fp); data['packages']['platforms']['size'] = '615499'; fp.seek(0); fp.truncate(); json.dump(data, fp); fp.close()"
@@ -143,7 +140,7 @@ jobs:
         id: OSS
         run: |
           rm A12.zip
-          mdkir A12
+          mkdir A12
           cp -r bootloaders cores libraries variants boards.txt platform.txt programmers.txt A12/
           zip -r A12.zip A12
           ls -l  ${{ env.FIRMWARE }}/A12.zip
@@ -178,3 +175,9 @@ jobs:
           password: ${{secrets.MQTT_PASSWORD}}
           topic: ${{github.repository}}/${{github.workflow}}
           message: ${{steps.rebuild.outputs.status}}
+
+      - name: Delet mark tag
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
