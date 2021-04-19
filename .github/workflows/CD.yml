@@ -82,11 +82,12 @@ jobs:
       - name: SHA-256
         id: SHA
         run: |
+          ls -lh  ${{ env.FIRMWARE }}/A12.zip
           sha256sum  ${{ env.FIRMWARE }}/A12.zip
           # sha256sum  ${{ env.FIRMWARE }}/A12.zip > SHA.txt
           ls -lh  ${{ env.FIRMWARE }}/A12.zip >> README.txt
           sha256sum  ${{ env.FIRMWARE }}/A12.zip >> README.txt
-          python -c "import json; import os; fp=open(os.path.expanduser('./a12_index.json'), 'r+'); data=json.load(fp); data['packages']['platforms']['checksum'] = 'false'; fp.seek(0); fp.truncate(); json.dump(data, fp); fp.close()"
+          python -c "import json; import os; fp=open(os.path.expanduser('./a12_index.json'), 'r+'); data=json.load(fp); data['packages']['platforms']['size'] = '615499'; fp.seek(0); fp.truncate(); json.dump(data, fp); fp.close()"
           echo "::set-output name=status::success"
 
       - name: Upload Release
