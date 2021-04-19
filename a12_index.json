@@ -9,10 +9,10 @@
       },
       "platforms": [
         {
-          "name": "LGT8F328P",
+          "name": "A12",
           "architecture": "avr",
           "version": "1.0.0",
-          "category": "arduino",
+          "category": "lgt8fx",
           "url": "https://platformio.oss-accelerate.aliyuncs.com/package/arduino/A12.zip",
           "archiveFileName": "A12.zip",
           "checksum": "SHA-256:800bb286776d6d3c2c6c71f4d691dfb4f974e1f0792b38f97315e12859e2ec18",
@@ -22,7 +22,10 @@
           },
           "boards": [
             {
-              "name": "B12A"
+              "name": "LGT8F328P-LQFP48"
+            },
+            {
+              "name": "LGT8F328P-LQFP32"
             }
           ]
         }
