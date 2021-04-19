@@ -10,6 +10,8 @@
 [![Build Status](https://cloud.drone.io/api/badges/OS-Q/A12/status.svg)](https://cloud.drone.io/OS-Q/A12)
 ### [简介](https://github.com/OS-Q/A12/wiki)
 
-[A12](https://github.com/OS-Q/A12) 适用于 [LGT8F](http://www.lgtic.com/lgt8fx8p/)芯片
+[A12](https://github.com/OS-Q/A12) Arduino Core 适用于[LGT8F](http://www.lgtic.com/lgt8fx8p/) 芯片
+
+* Paste this url in URL: https://github.com/OS-Q/A12/releases/latest/download/a12_index.json
 
 ### [源圈 OS-Q (Open Source & QA) ](http://www.OS-Q.com)

@@ -57,7 +57,7 @@ jobs:
         id: tag
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          echo "::set-output name=release_tag::release_a12_package_$(date +"%Y.%m.%d")_${GITHUB_REF/refs\/tags\//}"
+          echo "::set-output name=release_tag::release_a12_$(date +"%Y.%m.%d")_${GITHUB_REF/refs\/tags\//}"
           echo "::set-output name=status::success"
 
       - name: Package Src
@@ -89,8 +89,7 @@ jobs:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
             ${{ env.FIRMWARE }}/A12.zip
-            ${{ env.FIRMWARE }}/README.txt
-            ${{ env.FIRMWARE }}/arduino_index.json
+            ${{ env.FIRMWARE }}/a12_index.json
 
       - name: Setup OSS
         uses: stopstopstop/ossutil-action@master
@@ -102,7 +101,8 @@ jobs:
       - name: Upload To OSS
         id: OSS
         run: |
-          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_BUCKET }} -rf
+          mv ${{ env.FIRMWARE }}/A12.zip ${{ env.FIRMWARE }}/A12-${GITHUB_REF/refs\/tags\//}.zip
+          ossutil cp ${{ env.FIRMWARE }}/A12-${GITHUB_REF/refs\/tags\//}.zip ${{ secrets.OSS_BUCKET }}/package/arduino/ -rf
           echo "::set-output name=status::success"
 
       - name: Send Mail
@@ -120,6 +120,7 @@ jobs:
           content_type: text/html
           convert_markdown: true
           body: file://README.md
+          attachments: a12_index.json , README.txt
 
       - name: notification
         uses: stopstopstop/mqtt-action@master
