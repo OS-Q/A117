@@ -7,6 +7,7 @@ on:
       - main
     paths-ignore:
       - '**.md'
+      - '**.yml'
 
 env:
   UPLOAD_BUILD: true

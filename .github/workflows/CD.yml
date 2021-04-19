@@ -102,6 +102,25 @@ jobs:
             ${{ env.FIRMWARE }}/A12.zip
             ${{ env.FIRMWARE }}/a12_index.json
 
+      - name: get latest
+        run: |
+          wget https://github.com/OS-Q/P12/releases/latest/download/P12.zip -O TEST.zip
+
+      - name: Delet new tag
+        id: delet
+        if: failure()
+        run: |
+          git fetch
+          git tag -d ${{ steps.tag.outputs.release_tag }}
+          git push origin :refs/tags/${{ steps.tag.outputs.release_tag }}
+
+      - name: Delet mark tag
+        id: deletv
+        run: |
+          git fetch
+          git tag -d ${GITHUB_REF/refs\/tags\//}
+          git push origin :refs/tags/${GITHUB_REF/refs\/tags\//}
+
       - name: Setup OSS
         uses: stopstopstop/ossutil-action@master
         with:
