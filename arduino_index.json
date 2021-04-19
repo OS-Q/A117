@@ -1,0 +1,45 @@
+{
+  "packages": [
+    {
+      "name": "LGT8fx",
+      "maintainer": "Qitas",
+      "websiteURL": "https://github.com/OS-Q/A12",
+      "help": {
+        "online": "https://github.com/OS-Q/A12"
+      },
+      "platforms": [
+        {
+          "name": "LGT8fx MCU",
+          "architecture": "avr",
+          "version": "1.0.6",
+          "category": "lgt8fx",
+          "url": "https://platformio.oss-accelerate.aliyuncs.com/package/arduino/lgt8f-1.0.6.zip",
+          "archiveFileName": "lgt8f-1.0.6.zip",
+          "checksum": "SHA-256:e7384539898243cb013182b37780205330d61fa8c5276f512422b84b2a2f23bd",
+          "size": "615499",
+          "help": {
+            "online": "https://github.com/OS-Q/A12/issues"
+          },
+          "boards": [
+            {
+              "name": "LGT8F328P-LQFP48"
+            },
+            {
+              "name": "LGT8F328P-LQFP32"
+            },
+            {
+              "name": "LGT8F328P-SSOP20"
+            },
+            {
+              "name": "LGT8F328D-LQFP32"
+            },
+            {
+              "name": "LGT8F328D-SSOP20"
+            }
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ]
+}
