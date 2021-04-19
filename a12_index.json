@@ -12,7 +12,7 @@
           "name": "LGT8F MCU",
           "architecture": "avr",
           "version": "1.0.6",
-          "category": "lgt8fx",
+          "category": "arduino",
           "url": "https://platformio.oss-accelerate.aliyuncs.com/package/arduino/lgt8f-1.0.6.zip",
           "archiveFileName": "lgt8f-1.0.6.zip",
           "checksum": "SHA-256:e7384539898243cb013182b37780205330d61fa8c5276f512422b84b2a2f23bd",
@@ -22,13 +22,7 @@
           },
           "boards": [
             {
-              "name": "B12A-LQFP48"
-            },
-            {
-              "name": "B12B-LQFP32"
-            },
-            {
-              "name": "B12C-SSOP20"
+              "name": "B12A"
             }
           ]
         }

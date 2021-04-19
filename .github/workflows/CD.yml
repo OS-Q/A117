@@ -67,17 +67,27 @@ jobs:
           echo $(date +"%Y.%m.%d") >> README.txt
           echo ${GITHUB_REF/refs\/tags\//} >> README.txt
           echo -e "www.OS-Q.com\n" >> README.txt
-          git log --stat -1 >> README.txt
+          # git log --stat -1 >> README.txt
           zip -r A12.zip bootloaders cores libraries variants boards.txt platform.txt programmers.txt
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
           echo "::set-output name=status::success"
 
-      - name: Upload Firmware
+      - name: Upload Output
         if: steps.package.outputs.status == 'success' &&  env.UPLOAD_BUILD
         uses: actions/upload-artifact@v2
         with:
           name: A12
           path: ${{ env.FIRMWARE }}/A12.zip
+
+      - name: SHA-256
+        id: SHA
+        run: |
+          sha256sum  ${{ env.FIRMWARE }}/A12.zip
+          # sha256sum  ${{ env.FIRMWARE }}/A12.zip > SHA.txt
+          ls -lh  ${{ env.FIRMWARE }}/A12.zip >> README.txt
+          sha256sum  ${{ env.FIRMWARE }}/A12.zip >> README.txt
+          python -c "import json; import os; fp=open(os.path.expanduser('./a12_index.json'), 'r+'); data=json.load(fp); data['packages']['platforms']['checksum'] = 'false'; fp.seek(0); fp.truncate(); json.dump(data, fp); fp.close()"
+          echo "::set-output name=status::success"
 
       - name: Upload Release
         id: upload-release
@@ -101,8 +111,7 @@ jobs:
       - name: Upload To OSS
         id: OSS
         run: |
-          mv ${{ env.FIRMWARE }}/A12.zip ${{ env.FIRMWARE }}/A12-${GITHUB_REF/refs\/tags\//}.zip
-          ossutil cp ${{ env.FIRMWARE }}/A12-${GITHUB_REF/refs\/tags\//}.zip ${{ secrets.OSS_BUCKET }}/package/arduino/ -rf
+          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_BUCKET }}/package/arduino/ -rf
           echo "::set-output name=status::success"
 
       - name: Send Mail
