@@ -105,14 +105,14 @@ jobs:
       - name: Setup OSS
         uses: stopstopstop/ossutil-action@master
         with:
-          endpoint: ${{ secrets.OSS_A_ENDPOINT }}
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
           access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
           access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
 
       - name: Upload To OSS
         id: OSS
         run: |
-          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_BUCKET }}/package/arduino/ -rf
+          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_A_BUCKET }} -rf
           echo "::set-output name=status::success"
 
       - name: Send Mail
