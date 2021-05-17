@@ -53,7 +53,7 @@ jobs:
 
       - name: Build
         id: build
-        if: success() && github.repository == 'OS-Q/A12'
+        if: success() && github.repository == 'OS-Q/A117'
         run: |
           pio run -d ${{ matrix.examples }} > ${{ matrix.examples }}/log.txt
 

@@ -63,7 +63,7 @@ ifeq ($(ENV), arduino)
 # For Arduino, we assume that we're connected to the optiboot directory
 # included with the arduino distribution, which means that the full set
 # of avr-tools are "right up there" in standard places.
-TOOLROOT = /Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr 
+TOOLROOT = /Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr
 GCCROOT = $(TOOLROOT)/avr/bin/
 
 ifeq ($(OS), windows)
@@ -105,7 +105,7 @@ STK500-2 = $(STK500) -d$(MCU_TARGET) -ms -q -lCF -LCF -cUSB -I200kHz -s -wt
 OBJ        = $(PROGRAM).o
 OPTIMIZE = -Os -fno-inline-small-functions -fno-split-wide-types -mshort-calls
 
-DEFS       = 
+DEFS       =
 LIBS       =
 
 CC         = $(GCCROOT)avr-gcc
@@ -241,7 +241,7 @@ virboot328: $(PROGRAM)_atmega328.lst
 atmega168: TARGET = atmega168
 atmega168: MCU_TARGET = atmega168
 atmega168: CFLAGS += $(COMMON_OPTIONS)
-atmega168: AVR_FREQ ?= 16000000L 
+atmega168: AVR_FREQ ?= 16000000L
 atmega168: $(PROGRAM)_atmega168.hex
 atmega168: $(PROGRAM)_atmega168.lst
 
@@ -319,7 +319,7 @@ atmega1280: $(PROGRAM)_atmega1280.lst
 atmega8: TARGET = atmega8
 atmega8: MCU_TARGET = atmega8
 atmega8: CFLAGS += $(COMMON_OPTIONS)
-atmega8: AVR_FREQ ?= 16000000L 
+atmega8: AVR_FREQ ?= 16000000L
 atmega8: LDSECTIONS  = -Wl,--section-start=.text=0x1e00 -Wl,--section-start=.version=0x1ffe
 atmega8: $(PROGRAM)_atmega8.hex
 atmega8: $(PROGRAM)_atmega8.lst
@@ -341,7 +341,7 @@ lgt8f328p: MCU_TARGET = atmega328p
 lgt8f328p: CFLAGS += $(COMMON_OPTIONS)
 #lgt8f328p: CFLAGS += $(COMMON_OPTIONS) '-DSOFT_UART'
 lgt8f328p: CFLAGS += '-DVIRTUAL_BOOT_PARTITION'
-lgt8f328p: AVR_FREQ ?= 16000000L 
+lgt8f328p: AVR_FREQ ?= 16000000L
 lgt8f328p: LDSECTIONS = -Wl,--section-start=.bootv=0x0
 lgt8f328p: LDSECTIONS += -Wl,--section-start=.text=0x7400 -Wl,--section-start=.version=0x77fe
 lgt8f328p: $(PROGRAM)_lgt8f328p.elf
@@ -495,7 +495,7 @@ bobuino_isp: LFUSE ?= F7
 bobuino_isp: EFUSE ?= FD
 bobuino_isp: isp
 
-# MEGA1280 Board (this is different from the atmega1280 chip platform)
+# MEGA11780 Board (this is different from the atmega1280 chip platform)
 # Mega has a minimum boot size of 1024 bytes, so enable extra functions
 # Note that optiboot does not (can not) work on the MEGA2560
 #mega: TARGET = atmega1280

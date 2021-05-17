@@ -35,7 +35,7 @@ jobs:
         qio platform install https://github.com/OS-Q/P12/releases/latest/download/P12.zip
 
     - name: Build
-      if: github.repository == 'OS-Q/A12'
+      if: github.repository == 'OS-Q/A117'
       run: |
         qio run -d ${{ matrix.examples }}
 
@@ -61,12 +61,12 @@ jobs:
       - name: Package Src
         id: package
         run: |
-          echo "Arduino Core A12 for LGT8F MCU" >> README.txt
+          echo "Arduino Core A117 for LGT8F MCU" >> README.txt
           echo $(date +"%Y.%m.%d") >> README.txt
           echo ${GITHUB_REF/refs\/tags\//} >> README.txt
           echo -e "www.OS-Q.com\n" >> README.txt
           # git log --stat -1 >> README.txt
-          zip -r A12.zip bootloaders cores libraries variants boards.txt platform.txt programmers.txt
+          zip -r A117.zip bootloaders cores libraries variants boards.txt platform.txt programmers.txt
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
           echo "::set-output name=status::success"
 
@@ -74,14 +74,14 @@ jobs:
         if: steps.package.outputs.status == 'success' &&  env.UPLOAD_BUILD
         uses: actions/upload-artifact@v2
         with:
-          name: A12
-          path: ${{ env.FIRMWARE }}/A12.zip
+          name: A117
+          path: ${{ env.FIRMWARE }}/A117.zip
 
       - name: SHA-256
         id: SHA
         run: |
-          ls -l ${{ env.FIRMWARE }}/A12.zip >> README.txt
-          sha256sum  ${{ env.FIRMWARE }}/A12.zip >> README.txt
+          ls -l ${{ env.FIRMWARE }}/A117.zip >> README.txt
+          sha256sum  ${{ env.FIRMWARE }}/A117.zip >> README.txt
           # python -c "import json; import os; fp=open(os.path.expanduser('./a12_index.json'), 'r+'); data=json.load(fp); data['packages']['platforms']['size'] = '615499'; fp.seek(0); fp.truncate(); json.dump(data, fp); fp.close()"
           echo "::set-output name=status::success"
 
@@ -94,12 +94,12 @@ jobs:
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
-            ${{ env.FIRMWARE }}/A12.zip
+            ${{ env.FIRMWARE }}/A117.zip
             ${{ env.FIRMWARE }}/a12_index.json
 
       - name: get latest
         run: |
-          wget https://github.com/OS-Q/A12/releases/latest/download/A12.zip -O TEST.zip
+          wget https://github.com/OS-Q/A117/releases/latest/download/A117.zip -O TEST.zip
 
       - name: Delet new tag
         id: delet
@@ -119,13 +119,13 @@ jobs:
       - name: Upload To OSS
         id: OSS
         run: |
-          rm A12.zip
-          mkdir A12
-          cp -r bootloaders cores libraries variants boards.txt platform.txt programmers.txt A12/
-          zip -r A12.zip A12
-          ls -l  ${{ env.FIRMWARE }}/A12.zip
-          sha256sum  ${{ env.FIRMWARE }}/A12.zip
-          ossutil cp ${{ env.FIRMWARE }}/A12.zip ${{ secrets.OSS_A_BUCKET }} -rf
+          rm A117.zip
+          mkdir A117
+          cp -r bootloaders cores libraries variants boards.txt platform.txt programmers.txt A117/
+          zip -r A117.zip A117
+          ls -l  ${{ env.FIRMWARE }}/A117.zip
+          sha256sum  ${{ env.FIRMWARE }}/A117.zip
+          ossutil cp ${{ env.FIRMWARE }}/A117.zip ${{ secrets.OSS_A_BUCKET }} -rf
           ossutil cp ${{ env.FIRMWARE }}/a12_index.json ${{ secrets.OSS_A_BUCKET }} -f
           echo "::set-output name=status::success"
 
@@ -137,7 +137,7 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: OS-Q A12 Released
+          subject: OS-Q A117 Released
           to: ${{secrets.MAIL_TO}}
           from: Qitas
           cc: ${{github.event.pusher.email}}

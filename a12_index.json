@@ -1,24 +1,24 @@
 {
   "packages": [
     {
-      "name": "A12",
+      "name": "A117",
       "maintainer": "Qitas",
-      "websiteURL": "https://github.com/OS-Q/A12",
+      "websiteURL": "https://github.com/OS-Q/A117",
       "help": {
-        "online": "https://github.com/OS-Q/A12"
+        "online": "https://github.com/OS-Q/A117"
       },
       "platforms": [
         {
-          "name": "A12",
+          "name": "A117",
           "architecture": "avr",
           "version": "1.0.0",
           "category": "lgt8fx",
-          "url": "https://platformio.oss-accelerate.aliyuncs.com/package/arduino/A12.zip",
-          "archiveFileName": "A12.zip",
+          "url": "https://platformio.oss-accelerate.aliyuncs.com/package/arduino/A117.zip",
+          "archiveFileName": "A117.zip",
           "checksum": "SHA-256:800bb286776d6d3c2c6c71f4d691dfb4f974e1f0792b38f97315e12859e2ec18",
           "size": "385087",
           "help": {
-            "online": "https://github.com/OS-Q/A12/issues"
+            "online": "https://github.com/OS-Q/A117/issues"
           },
           "boards": [
             {
